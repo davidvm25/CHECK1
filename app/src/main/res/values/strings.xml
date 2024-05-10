@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">check1</string>
+    <string name="button">Crear nueva tarea</string>
+    <string name="button2">editar</string>
+    <string name="button3">borrar</string>
+    <string name="texto1">Checklist Personal</string>
+    <string name="date">Ingrese la fecha</string>
+    <string name="EditText">Ingrese la descrpcion</string>
+</resources>
