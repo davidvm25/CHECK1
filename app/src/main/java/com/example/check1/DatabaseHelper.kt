@@ -1,4 +1,4 @@
-package com.example.check1
+/*package com.example.check1
 
 import android.content.ContentValues
 import android.content.Context
