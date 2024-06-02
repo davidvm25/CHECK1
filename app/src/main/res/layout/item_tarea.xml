@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="#938D8D"
+    android:padding="8dp">
 
     <TextView
-        android:id="@+id/nombreTextView"
-        android:layout_width="81dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
-        android:text="Nombre de la tarea"
-        app:layout_constraintStart_toEndOf="@+id/activaTextView"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textViewNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/activaTextView"
-        android:layout_width="61dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="Estado de la tarea"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textViewDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewNombre"
+        android:layout_marginTop="4dp"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/btEditTarea"
-        android:layout_width="75dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/button2"
-        android:textColor="#000000"
-        android:textSize="8sp"
-        app:layout_constraintStart_toEndOf="@+id/nombreTextView"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textViewFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDescripcion"
+        android:layout_marginTop="4dp"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/btDeleteTarea"
-        android:layout_width="75dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/button3"
-        android:textColor="#000000"
-        android:textSize="8sp"
-        app:layout_constraintStart_toEndOf="@+id/btEditTarea"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:id="@+id/buttonEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_menu_edit" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/buttonEliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/buttonEditar"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_menu_delete" />
+
+</RelativeLayout>

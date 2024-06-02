@@ -1,51 +1,47 @@
 package com.example.check1
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Button
 import android.content.Intent
-import androidx.recyclerview.widget.RecyclerView
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-
-
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var databaseHelper: DatabaseHelper
+    private lateinit var recyclerView: RecyclerView
     private lateinit var tareaAdapter: TareaAdapter
-    private lateinit var listaTareas: RecyclerView
-    private lateinit var crearTareaButton: Button
-
-    private var listaTareasData = mutableListOf<Tarea>()
+    private lateinit var fabAgregarTarea: FloatingActionButton
+    private lateinit var dbHandler: DBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        listaTareas = findViewById(R.id.listaTareas)
-        crearTareaButton = findViewById(R.id.crearTarea)
 
-        databaseHelper = DatabaseHelper(this)
+        recyclerView = findViewById(R.id.recyclerViewTareas)
+        fabAgregarTarea = findViewById(R.id.fabAgregarTarea)
+        dbHandler = DBHelper(this)
 
-        // Configurar RecyclerView
-        listaTareas.layoutManager = LinearLayoutManager(this)
-        tareaAdapter = TareaAdapter(listaTareasData)
-        listaTareas.adapter = tareaAdapter
+        // Configurar el RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        tareaAdapter = TareaAdapter(dbHandler.obtenerTareas(), this)
+        recyclerView.adapter = tareaAdapter
 
-        // Abrir actividad para crear nueva tarea al hacer clic en el botón
-        crearTareaButton.setOnClickListener {
-            val intent = Intent(this, CrearTareaActivity::class.java)
+        // Configurar el FloatingActionButton
+        fabAgregarTarea.setOnClickListener {
+            val intent = Intent(this, AddEditTareaActivity::class.java)
             startActivity(intent)
         }
-
-        // Obtener todas las tareas almacenadas en la base de datos
-        val tareasAlmacenadas = databaseHelper.obtenerTodasLasTareas()
-
-        // Limpiar la lista actual de tareas y agregar las tareas almacenadas
-        listaTareasData.clear()
-        listaTareasData.addAll(tareasAlmacenadas)
-
-        // Notificar al adaptador que los datos han cambiado
-        tareaAdapter.notifyDataSetChanged()
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Actualiza la lista de tareas cuando se retorne a la actividad principal
+        tareaAdapter.actualizarTareas(dbHandler.obtenerTareas())
+    }
+
+    // actualiza la lista de tarea
+    fun actualizarListaTareas() {
+        tareaAdapter.actualizarTareas(dbHandler.obtenerTareas())
+    }
 }
